@@ -1,0 +1,1126 @@
+            /* ====================================================
+            --- 1. GLOBAL RESET & BODY ---
+            ==================================================== */
+            * {
+                box-sizing: border-box; /* Ensures padding doesn't add to the width */
+                margin: 0;
+                padding: 0;
+            }
+
+            body {
+                margin: 0;
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+                color: #111;
+                background-color: #ffffff;
+            }
+
+            a {
+                text-decoration: none;
+                color: #111;
+            }
+
+            ul {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+            }
+
+            /* ====================================================
+            --- 2. HEADER & NAVIGATION ---
+            ==================================================== */
+
+            /* --- 2a. Top Bar --- */
+            .top-bar {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 8px 48px;
+                background-color: #f5f5f5;
+            }
+
+            .jordan-logo {
+                height: 24px;
+                width: 24px;
+            }
+
+            .top-bar-right a {
+                font-size: 12px;
+                font-weight: 500;
+                padding: 0 8px;
+                color: #111;
+            }
+
+            .top-bar-right span {
+                font-size: 12px;
+                color: #757575;
+            }
+
+            /* --- 2b. Main Navigation --- */
+            .main-nav {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 0 48px;
+                background-color: #ffffff;
+                border-bottom: 1px solid #f0f0f0;
+                position: relative;
+                height: 80px;
+            }
+
+            .nav-left {
+                position: absolute;
+                left: 48px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+
+            .nike-logo {
+                height: 60px;
+                width: 60px;
+            }
+
+            .nav-menu {
+                display: flex;
+            }
+
+            .nav-menu li {
+                padding: 0 12px;
+            }
+
+            .nav-menu a {
+                display: inline-block;
+                padding: 28px 0;
+                font-size: 16px;
+                font-weight: 500;
+                color: #111;
+                border-bottom: 2px solid transparent;
+            }
+
+            .nav-menu a:hover {
+                border-bottom: 2px solid #111;
+            }
+
+            /* --- 2c. Nav Right (Search & Icons) --- */
+            .nav-right {
+                position: absolute;
+                right: 48px;
+                top: 50%;
+                transform: translateY(-50%);
+                display: flex;
+                align-items: center;
+                gap: 16px;
+            }
+
+            .search-container {
+                display: flex;
+                align-items: center;
+                background-color: #f5f5f5;
+                border-radius: 30px;
+                padding: 10px 16px;
+            }
+
+            .search-icon {
+                width: 20px;
+                height: 20px;
+                margin-right: 8px;
+                opacity: 0.7;
+            }
+
+            .search-container input {
+                border: none;
+                outline: none;
+                background-color: transparent;
+                font-size: 16px;
+                width: 140px;
+            }
+
+            .search-container input::placeholder {
+                color: #757575;
+            }
+
+            .nav-icon {
+                padding: 4px;
+            }
+
+            /* --- 2d. Mega Menu Dropdowns --- */
+            .mega-menu {
+                position: absolute;
+                top: 80px; /* This is the height of your .main-nav */
+                left: 0;
+                right: 0;
+                background-color: #ffffff;
+                border-top: 1px solid #f0f0f0; /* Matches your nav border */
+                box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+
+                /* Hide by default */
+                visibility: hidden;
+                opacity: 0;
+                transform: translateY(10px); /* Start slightly lower */
+                transition: all 0.3s ease;
+                z-index: 100;
+            }
+
+            .nav-item-with-megamenu:hover .mega-menu {
+                visibility: visible;
+                opacity: 1;
+                transform: translateY(0); /* Move to final position */
+            }
+
+            .mega-menu-content {
+                display: flex;
+                gap: 72px; /* Space between columns */
+                max-width: 1280px; /* Made wider for 5 columns */
+                margin: 0 auto; /* Centers the content */
+                padding: 32px 48px; /* Padding inside the dropdown */
+            }
+
+            .mega-menu-column {
+                flex: 1; /* Each column takes up equal space */
+                min-width: 170px; /* Prevents columns from getting too narrow */
+            }
+
+            .mega-menu-column h3 {
+                font-size: 16px;
+                font-weight: 600;
+                color: #111;
+                margin-top: 0;
+                margin-bottom: 20px;
+            }
+
+            .mega-menu-column ul {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+
+            .mega-menu-column li {
+                margin-bottom: 12px;
+            }
+
+            .mega-menu-column a {
+                display: block;
+                padding: 0;
+                font-size: 14px;
+                font-weight: 400;
+                color: #757575; /* Grey text for links */
+                border-bottom: none; /* Removes the nav hover border */
+                transition: color 0.2s ease;
+            }
+
+            .mega-menu-column a:hover {
+                color: #111; /* Darken on hover */
+                border-bottom: none; /* Just to be sure */
+            }
+
+            /* --- 2e. Notification Menu (for SNKRS) --- */
+            .mega-menu--notification {
+                background-color: #f5f5f5; /* Light grey background from image */
+                padding: 16px 48px; /* Padding for the bar */
+                text-align: center;
+                border-top: 1px solid #e5e5e5; /* Faint top border */
+            }
+
+            .mega-menu--notification p {
+                margin: 0;
+                font-size: 14px;
+                color: #111;
+                font-weight: 400;
+            }
+
+            /* ====================================================
+            --- 3. RESPONSIVE NAVIGATION STYLES ---
+            ==================================================== */
+
+            /* 3a. Hamburger Button (Hidden on Desktop) */
+            .mobile-menu-button {
+                display: none; /* Hidden by default */
+                background: none;
+                border: none;
+                padding: 8px;
+                cursor: pointer;
+                position: absolute;
+                right: 20px;
+                top: 50%;
+                transform: translateY(-50%);
+                z-index: 101;
+            }
+
+            /* 3b. Mobile Menu Overlay (Hidden on Desktop) */
+            .mobile-menu-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: #ffffff;
+                z-index: 1000;
+                padding: 60px 24px 24px;
+                overflow-y: auto;
+                transform: translateX(100%); /* Start off-screen */
+                transition: transform 0.3s ease-in-out;
+            }
+
+            /* This rule shows the menu when the checkbox is checked */
+            #mobile-menu-toggle:checked ~ .mobile-menu-overlay {
+                transform: translateX(0);
+            }
+
+            .mobile-menu-close {
+                position: absolute;
+                top: 15px;
+                right: 20px;
+                background: none;
+                border: none;
+                font-size: 36px;
+                font-weight: 300;
+                color: #111;
+                cursor: pointer;
+                line-height: 1;
+            }
+
+            .mobile-nav-menu li {
+                padding: 0;
+                margin-bottom: 20px;
+                border-bottom: 1px solid #f0f0f0;
+            }
+
+            .mobile-nav-menu li:last-child {
+                border-bottom: none;
+            }
+
+            .mobile-nav-menu a {
+                display: block;
+                padding: 12px 0;
+                font-size: 18px;
+                font-weight: 500;
+                color: #111;
+                border-bottom: none; /* Override desktop hover effect */
+            }
+
+            .mobile-nav-menu a:hover {
+                border-bottom: none; /* Override desktop hover effect */
+                color: #757575;
+            }
+
+            .mobile-nav-menu hr {
+                border: none;
+                border-top: 1px solid #e5e5e5;
+                margin: 20px 0;
+            }
+
+            /* 3c. Media Query to activate mobile view */
+            @media (max-width: 1024px) {
+                /* Hide desktop-specific elements */
+                .top-bar,
+                .nav-menu,
+                .mega-menu,
+                .search-container input {
+                    display: none;
+                }
+
+                /* Show the mobile hamburger button */
+                .mobile-menu-button {
+                    display: block;
+                }
+
+                /* Adjust the main nav bar layout for mobile */
+                .main-nav {
+                    justify-content: space-between;
+                    padding: 0 24px;
+                    height: 60px;
+                }
+                .nav-left,
+                .nav-right {
+                    position: static; /* Let them fall into the flex layout */
+                    transform: none;
+                }
+                .nike-logo {
+                    height: 40px;
+                    width: 40px;
+                }
+                .nav-right {
+                    gap: 8px; /* Reduce space between right-side icons */
+                }
+                .search-container {
+                    background-color: transparent;
+                    padding: 4px;
+                }
+                .search-icon {
+                    margin-right: 0;
+                }
+            }
+
+            /* 3d. Optional: Finer adjustments for very small phones */
+            @media (max-width: 767px) {
+                .main-nav {
+                    padding: 0 16px;
+                }
+                .mobile-menu-button {
+                    right: 12px;
+                }
+            }
+            /* --- Basic Setup --- */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+  margin: 0;
+  background-color: #ffffff;
+  color: #111;
+}
+
+/* --- Placeholders --- */
+.navbar-placeholder,
+.footer-placeholder {
+  height: 60px;
+  background-color: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  border-bottom: 1px solid #ddd;
+}
+.footer-placeholder {
+  margin-top: 40px;
+  border-top: 1px solid #ddd;
+  border-bottom: none;
+}
+
+/* --- Main Page 2-Column Layout --- */
+.product-page-container {
+  display: flex;
+  /* This is key: align items to the top */
+  align-items: flex-start;
+  max-width: 1440px;
+  margin: 24px auto;
+  padding: 0 40px;
+  gap: 40px;
+}
+
+/* =================================== */
+/* ===== COLUMN 1: IMAGE GALLERY ===== */
+/* =================================== */
+
+.product-image-section {
+  /* --- THIS IS THE STICKY MAGIC --- */
+  position: sticky;
+  top: 24px; /* Space from the top (adjust for your navbar height) */
+  /* ------------------------------- */
+
+  display: flex;
+  gap: 16px;
+  flex-basis: 60%; /* Left column takes up 60% of the width */
+  min-width: 50%; /* Prevents it from getting too small */
+}
+
+/* --- 1a. Thumbnail Gallery (Left) --- */
+.thumbnail-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 0 0 80px; /* Fixed width of 80px */
+}
+
+.thumbnail-item {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+.thumbnail-item:hover {
+  border-color: #888;
+}
+.thumbnail-item.active {
+  border-color: #111;
+  border-width: 2px;
+}
+.thumbnail-item img {
+  width: 100%;
+  display: block;
+}
+
+/* --- 1b. Main Image (Right) --- */
+.main-image-display {
+  flex: 1; /* Take up remaining space */
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #f5f5f5;
+}
+
+.main-product-image {
+  width: 100%;
+  display: block;
+}
+
+.rating-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background-color: #ffffff;
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
+.image-nav-arrows {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 10px;
+  z-index: 10;
+}
+
+.image-nav-arrows .arrow {
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* =================================== */
+/* ===== COLUMN 2: PRODUCT DETAILS ===== */
+/* =================================== */
+
+.product-details-section {
+  flex-basis: 40%; /* Right column takes up 40% */
+  min-width: 320px; /* Prevents it from getting too squished */
+}
+
+.product-name {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 4px;
+}
+.product-type {
+  font-size: 1.1rem;
+  color: #555;
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+.product-price {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.product-tax-info {
+  font-size: 0.9rem;
+  color: #777;
+  line-height: 1.4;
+  margin-top: 0;
+  margin-bottom: 24px;
+}
+
+/* --- Color Swatches --- */
+.color-selector {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(65px, 1fr));
+  gap: 10px;
+  margin-bottom: 24px;
+}
+.color-swatch {
+  border: 2px solid transparent;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  padding: 2px;
+}
+.color-swatch img {
+  width: 100%;
+  display: block;
+  border-radius: 6px;
+}
+.color-swatch:hover {
+  border-color: #ccc;
+}
+.color-swatch.active {
+  border-color: #111;
+}
+.color-swatch.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-image: linear-gradient(
+    to top right,
+    transparent 48.5%,
+    #ccc 48.5%,
+    #ccc 51.5%,
+    transparent 51.5%
+  );
+}
+.color-swatch.design-own {
+  border: 1px dashed #999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+.color-swatch.design-own img {
+  width: 50%;
+  border-radius: 0;
+}
+
+/* --- Size Selector --- */
+.size-selector {
+  margin-bottom: 24px;
+}
+.size-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.size-header label {
+  font-size: 1rem;
+  font-weight: 600;
+}
+.size-guide-link {
+  font-size: 0.9rem;
+  color: #555;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.size-guide-link:hover {
+  text-decoration: underline;
+}
+.size-guide-icon {
+  width: 20px;
+  height: 20px;
+  fill: #555;
+}
+.size-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.size-option {
+  width: 100%;
+  padding: 14px 10px;
+  font-size: 0.95rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
+  cursor: pointer;
+  text-align: center;
+}
+.size-option:hover {
+  border-color: #111;
+}
+.size-option:disabled {
+  background-color: #f5f5f5;
+  color: #ccc;
+  border-color: #e0e0e0;
+  cursor: not-allowed;
+  position: relative;
+  overflow: hidden;
+}
+/* Diagonal line for disabled sizes */
+.size-option:disabled::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -5%;
+  width: 110%;
+  height: 1px;
+  background: #ccc;
+  transform: rotate(-10deg);
+}
+
+
+/* --- Action Buttons --- */
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.btn {
+  width: 100%;
+  padding: 16px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.btn:hover {
+  opacity: 0.8;
+}
+.btn-primary {
+  background-color: #111;
+  color: #fff;
+}
+.btn-secondary {
+  background-color: #fff;
+  color: #111;
+  border: 1px solid #ccc;
+}
+.heart-icon {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: #111;
+  stroke-width: 2px;
+}
+
+/* --- Product Description --- */
+.product-description {
+  margin-bottom: 24px;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+.product-description ul {
+  padding-left: 20px;
+  margin: 16px 0;
+}
+.product-description li {
+  margin-bottom: 8px;
+}
+.product-details-link {
+  color: #111;
+  font-weight: 600;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* --- Product Accordion --- */
+.product-accordion {
+  border-top: 1px solid #e0e0e0;
+}
+.accordion-item {
+  border-bottom: 1px solid #e0e0e0;
+}
+.accordion-header {
+  width: 100%;
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 0;
+  cursor: pointer;
+  text-align: left;
+}
+.accordion-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+.review-stars {
+  display: flex;
+  gap: 2px;
+  margin-left: auto;
+  margin-right: 16px;
+}
+.review-stars svg {
+  width: 18px;
+  height: 18px;
+  fill: #111;
+}
+.review-stars svg:last-child {
+  fill: #e0e0e0; /* Simulating a 4.5 star rating */
+}
+.chevron-icon {
+  width: 24px;
+  height: 24px;
+  stroke: #111;
+  stroke-width: 2;
+  fill: none;
+  transition: transform 0.2s ease-in-out;
+}
+.accordion-content {
+  /* This is hidden by default */
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+.accordion-content p {
+  margin-top: 0;
+  padding-bottom: 24px;
+}
+
+/* This class is toggled with JavaScript */
+.accordion-item.open .accordion-content {
+  max-height: 1000px; /* Animate to a large height */
+}
+.accordion-item.open .chevron-icon {
+  transform: rotate(180deg);
+}
+
+/* =================================== */
+/* ===== FULL-WIDTH BOTTOM SECTION ===== */
+/* =================================== */
+
+.full-width-section {
+  max-width: 1360px; /* Aligns with the content above */
+  margin: 40px auto;
+  padding: 0 40px; /* Use padding, not margin, for alignment */
+}
+
+.gallery-header {
+  margin-bottom: 24px;
+}
+
+.gallery-header h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+.gallery-header p {
+  font-size: 1rem;
+  color: #555;
+  margin-top: 0;
+  margin-bottom: 24px;
+}
+
+.gallery-header .btn-secondary {
+  width: auto; /* Button just fits its content */
+  padding: 12px 24px;
+  font-size: 0.9rem;
+}
+
+/* --- The User Photo Grid --- */
+.user-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columns */
+  gap: 24px;
+}
+
+.gallery-image-container {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #f5f5f5; /* Placeholder bg */
+  cursor: pointer;
+}
+
+.gallery-image-container img {
+  width: 100%;
+  display: block;
+  .gallery-image-container img {
+  /* ... other styles ... */
+  aspect-ratio: 1 / 1; /* This makes it square */
+  /* ... other styles ... */
+}
+  object-fit: cover; /* Ensures images fill the box */
+  transition: transform 0.3s ease;
+}
+
+.gallery-image-container:hover img {
+  transform: scale(1.05); /* Simple zoom effect */
+}
+
+.gallery-icon-overlay {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white; /* This will color the SVG icon */
+}
+
+.gallery-icon-overlay svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+.gallery-username {
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-top: 10px;
+  color: #111;
+}
+
+/* --- The "Call to Action" Card --- */
+.gallery-item-cta {
+  background-color: #f5f5f5;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  font-weight: 600;
+.gallery-item-cta {
+  /* ... other styles ... */
+  aspect-ratio: 1 / 1; /* Match the other cards */
+  /* ... other styles ... */
+}
+  min-height: 300px;
+}
+
+.gallery-item-cta h3 {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.cta-plus-icon {
+  background-color: #111;
+  color: #fff;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 16px;
+  cursor: pointer;
+}
+
+.cta-plus-icon svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+/* --- Responsive Styles --- */
+/* For tablets */
+@media (max-width: 960px) {
+  .user-gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* For mobile phones */
+@media (max-width: 600px) {
+  .user-gallery-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .full-width-section {
+    padding: 0 20px; /* Less padding on mobile */
+  }
+}
+/* ====================================================
+    --- 9. 'DON'T MISS' SECTION (NEWLY ADDED) --- 
+    ==================================================== */
+
+    .dont-miss-section {
+        margin: 48px 0;
+        padding: 0 48px; /* Match site's horizontal padding */
+    }
+
+    .dont-miss-title {
+        font-size: 1.5rem; /* Match other section titles */
+        font-weight: 600;
+        margin: 0 0 1.5rem 0; /* Match header bottom margin */
+        color: #111;
+    }
+
+    .dont-miss-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* 3-column grid */
+        gap: 20px; /* Space between cards */
+    }
+
+    .dont-miss-card {
+        text-decoration: none;
+        color: #111;
+        display: block;
+    }
+
+    .dont-miss-card img {
+        width: 100%;
+        display: block;
+        aspect-ratio: 4 / 5; /* Taller image, like shop-by-sport */
+        object-fit: cover;
+        background-color: #f4f4f4; /* Placeholder bg */
+        margin-bottom: 16px;
+    }
+
+    .dont-miss-card .card-text-content h3 {
+        font-size: 1.1rem;
+        font-weight: 500;
+        margin: 0 0 4px 0;
+    }
+
+    .dont-miss-card .card-text-content p {
+        font-size: 1rem;
+        color: #757575;
+        margin: 0 0 16px 0;
+    }
+
+    .dont-miss-button {
+        /* Style it like a button, but it's part of the link */
+        background-color: #111;
+        color: #ffffff;
+        text-decoration: none;
+        padding: 8px 20px;
+        border-radius: 30px; /* Pill shape */
+        font-size: 0.9rem;
+        font-weight: 500;
+        transition: background-color 0.2s ease;
+        display: inline-block; /* Ensures padding is applied */
+    }
+
+    .dont-miss-card:hover .dont-miss-button {
+        background-color: #333; /* Darken on hover */
+    }
+
+    /* Responsive for the new section */
+    @media (max-width: 1024px) {
+        .dont-miss-grid {
+            grid-template-columns: 1fr 1fr; /* 2 columns on tablet */
+        }
+    }
+
+    @media (max-width: 768px) {
+        .dont-miss-section {
+            padding: 0 24px; /* Mobile padding */
+        }
+        
+        .dont-miss-grid {
+            grid-template-columns: 1fr; /* 1 column on mobile */
+        }
+        
+        .dont-miss-card img {
+            aspect-ratio: 16 / 9; /* Wider for mobile stack */
+        }
+    }
+.site-footer {
+    background-color: #ffffff;
+    color: #111111;
+    padding: 40px 60px; /* Padding around the whole footer */
+    border-top: 1px solid #f0f0f0; /* Faint top border */
+}
+
+.footer-container {
+    max-width: 1440px; /* Limit width */
+    margin: 0 auto; /* Center the container */
+}
+
+/* --- Top Section: Links + Location --- */
+.footer-main {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+    gap: 40px;
+    margin-bottom: 30px;
+}
+
+.footer-links-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 80px; /* Space between link columns */
+}
+
+.footer-column h3 {
+    font-size: 16px;
+    font-weight: 600; /* Bold */
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.footer-column h3 span { /* The dropdown arrow */
+    font-weight: normal;
+    margin-left: 5px;
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-column li {
+    margin-bottom: 12px;
+}
+
+.footer-column a {
+    text-decoration: none;
+    color: #111111; /* Dark text for links */
+    font-size: 14px;
+    font-weight: 400; /* Normal weight */
+}
+
+.footer-column a:hover {
+    color: #757575; /* Gray on hover */
+}
+
+/* --- Location --- */
+.footer-location a {
+    text-decoration: none;
+    color: #111111;
+    font-size: 14px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.footer-location a:hover {
+    color: #757575;
+}
+
+/* --- Bottom Bar: Copyright + Legal --- */
+.footer-bottom-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Allow wrapping */
+    gap: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #e5e5e5; /* The faint line from the image */
+    font-size: 12px;
+    color: #757575; /* Lighter gray for this section */
+}
+
+.copyright small {
+    font-size: inherit; /* Inherit 12px from parent */
+    color: inherit;
+}
+
+.footer-legal-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px; /* Space between legal links */
+}
+
+.footer-legal-links a {
+    text-decoration: none;
+    color: #757575; /* Lighter gray */
+    font-size: 12px;
+}
+
+.footer-legal-links a:hover {
+    color: #111111; /* Darker on hover */
+}
+
+.footer-legal-links a span { /* Dropdown arrow */
+    font-weight: normal;
+    margin-left: 3px;
+}

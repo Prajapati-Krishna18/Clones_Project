@@ -1,0 +1,1219 @@
+
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: #111;
+            background-color: #f5f5f5; /* <-- FIX 1: Set background to match top-bar */
+        }
+
+        a {
+            text-decoration: none;
+            color: #111;
+        }
+
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* --- 1. Top Bar --- */
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 48px;
+            background-color: #f5f5f5;
+        }
+
+        .jordan-logo {
+            height: 24px;
+            width: 24px;
+        }
+
+        .top-bar-right a {
+            font-size: 12px;
+            font-weight: 500;
+            padding: 0 8px;
+            color: #111;
+        }
+
+        .top-bar-right span {
+            font-size: 12px;
+            color: #757575;
+        }
+
+        /* --- 2. Main Navigation --- */
+        .main-nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 48px;
+            background-color: #ffffff;
+            border-bottom: 1px solid #f0f0f0;
+            position: relative;
+            height: 80px;
+        }
+
+        .nav-left {
+            position: absolute;
+            left: 48px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .nike-logo {
+            height: 60px;
+            width: 60px;
+        }
+
+        .nav-menu {
+            display: flex;
+        }
+
+        .nav-menu li {
+            padding: 0 12px;
+        }
+
+        .nav-menu a {
+            display: inline-block;
+            padding: 28px 0;
+            font-size: 16px;
+            font-weight: 500;
+            color: #111;
+            border-bottom: 2px solid transparent;
+        }
+
+        .nav-menu a:hover {
+            border-bottom: 2px solid #111;
+        }
+
+        /* --- 3. Nav Right --- */
+        .nav-right {
+            position: absolute;
+            right: 48px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            background-color: #f5f5f5;
+            border-radius: 30px;
+            padding: 10px 16px;
+        }
+
+        .search-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+            opacity: 0.7;
+        }
+
+        .search-container input {
+            border: none;
+            outline: none;
+            background-color: transparent;
+            font-size: 16px;
+            width: 140px;
+        }
+
+        .search-container input::placeholder {
+            color: #757575;
+        }
+
+        .nav-icon {
+            padding: 4px;
+        }
+      
+.mega-menu {
+    position: absolute;
+    top: 80px; /* This is the height of your .main-nav */
+    left: 0;
+    right: 0;
+    
+    background-color: #ffffff;
+    border-top: 1px solid #f0f0f0; /* Matches your nav border */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    
+    /* Hide by default */
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(10px); /* Start slightly lower */
+    transition: all 0.3s ease;
+    z-index: 100;
+}
+
+
+.nav-item-with-megamenu:hover .mega-menu {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0); /* Move to final position */
+}
+
+/* This is the inner container that centers the columns
+*/
+.mega-menu-content {
+    display: flex;
+    gap: 72px; /* Space between columns */
+    max-width: 1280px; /* UPDATED: Made wider for 5 columns */
+    margin: 0 auto; /* Centers the content */
+    padding: 32px 48px; /* Padding inside the dropdown */
+}
+
+.mega-menu-column {
+    flex: 1; /* Each column takes up equal space */
+    min-width: 170px; 
+}
+
+
+.mega-menu-column h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #111;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.mega-menu-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.mega-menu-column li {
+    margin-bottom: 12px;
+}
+
+
+.mega-menu-column a {
+    display: block;
+    padding: 0;
+    font-size: 14px;
+    font-weight: 400;
+    color: #757575; /* Grey text for links */
+    border-bottom: none; /* Removes the nav hover border */
+    transition: color 0.2s ease;
+}
+
+.mega-menu-column a:hover {
+    color: #111; /* Darken on hover */
+    border-bottom: none; /* Just to be sure */
+}
+
+.mega-menu--notification {
+    background-color: #f5f5f5; /* Light grey background from image */
+    padding: 16px 48px; /* Padding for the bar */
+    text-align: center;
+    border-top: 1px solid #e5e5e5; /* Faint top border */
+}
+
+.mega-menu--notification p {
+    margin: 0;
+    font-size: 14px;
+    color: #111;
+    font-weight: 400;
+}
+
+        @keyframes sliding {
+            0%, 20% { transform: translateX(0%); }
+            25%, 45% { transform: translateX(-20%); }
+            50%, 70% { transform: translateX(-40%); }
+            75%, 95% { transform: translateX(-60%); }
+            100% { transform: translateX(-80%); }
+        }
+        
+        .slider-container {
+            width: 100%;
+            overflow: hidden;
+            height: 600px; 
+            position: relative; 
+            margin-top: 50px; /* <-- FIX 2: This creates the gap */
+        }
+
+        .slides {
+            display: flex;
+            width: 500%; 
+            animation: sliding 20s infinite ease-in-out; 
+            height: 100%; 
+        }
+
+        .slide {
+            width: 20%; 
+            box-sizing: border-box;
+            flex-shrink: 0;
+            height: 100%; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #ffffff; 
+            background-repeat: no-repeat;
+            background-size: cover; 
+            background-position: center; 
+        }
+
+        .slide-content h2 {
+            font-size: 3rem; 
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
+        }
+
+        .slide-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); 
+        }
+
+        .slide-buttons button {
+            background-color: #fff;
+            color: #111;
+            border: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .slide-buttons button:hover {
+            background-color: #eee;
+        }
+
+        .fake-slider-nav {
+            position: absolute;
+            bottom: 20px;
+            right: 24px;
+            z-index: 10;
+            display: flex;
+            gap: 12px;
+        }
+
+        .fake-button {
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #111;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            user-select: none; /* Prevents text selection */
+        }
+        
+        .athlete-picks {
+            padding: 0 48px; /* Match site's horizontal padding */
+            margin-top: 48px; /* Space above the section */
+            margin-bottom: 48px; /* Space below the section */
+        }
+        
+        .athlete-picks-title {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #111;
+        }
+        
+        .picks-container {
+            display: flex;
+            gap: 20px; /* Space between the two images */
+        }
+        
+        .pick-card {
+            position: relative; 
+            flex: 1; /* Each card takes up 50% of the container */
+            border-radius: 8px; 
+            overflow: hidden; 
+            aspect-ratio: 4 / 3; /* Gives the card a consistent shape */
+        }
+        
+        .pick-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Fills the container, cropping as needed */
+            display: block;
+        }
+        
+        .shop-button {
+            position: absolute;
+            bottom: 24px;
+            left: 24px;
+            background-color: #ffffff;
+            color: #111111;
+            text-decoration: none;
+            padding: 8px 20px;
+            border-radius: 30px; /* Makes it a pill shape */
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+        
+        .shop-button:hover {
+            background-color: #f0f0f0; 
+            transform: scale(1.03); 
+        }
+
+        @media (max-width: 768px) {
+            .athlete-picks {
+                padding: 0 24px; /* Reduce padding on mobile */
+            }
+            .picks-container {
+                flex-direction: column; /* Stack the cards vertically */
+            }
+            .pick-card {
+                aspect-ratio: 16 / 9; /* Adjust aspect ratio for vertical layout */
+            }
+        }
+    
+        .featured-title {
+            font-size: 1.75rem;
+            font-weight: 500;
+            margin-bottom: 1%;
+            margin-left: 3%;
+            color: #000000;
+        }
+
+        .featured-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* 2x2 grid */
+        }
+
+        .featured-card {
+            position: relative;
+            overflow: hidden;
+            /* border-radius: 8px;  */
+            aspect-ratio: 7 / 5; /* Consistent shape */
+            background-color: #eee; /* Placeholder bg */
+        }
+
+        .featured-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .card-content {
+            position: absolute;
+            bottom: 32px;
+            left: 32px;
+            z-index: 2; 
+        }
+        
+        .card-pre-title {
+            position: absolute;
+            top: 32px;
+            left: 32px;
+            z-index: 2;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #B22222; /* Firebrick red to match image */
+        }
+
+        .card-top-right {
+            position: absolute;
+            top: 32px;
+            right: 32px;
+            z-index: 2;
+            text-align: right;
+            color: rgb(255, 255, 255);
+        }
+        
+        .card-subtitle {
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+        
+        .card-title-large {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .card-title-medium {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        
+        .full-card-link {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
+            font-size: 0; /* Hide text for accessibility */
+            color: transparent;
+        }
+
+        .card-top-right .nike-swoosh-icon {
+            width: 60px;
+            height: 60px;
+            fill: currentColor; /* Inherits the 'color: white' */
+            margin-bottom: 8px;
+        }
+        .slider-buttons{
+            background-color: #ffffff;
+            color: #000000;
+            border: none;
+            padding: 10px 20px;
+            margin: 0 10px; 
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .red{
+            background-color: #ffffff;
+            color: #df1212;
+            border: none;
+            padding: 10px 20px;
+            margin: 0 10px; 
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        @media (max-width: 768px) {
+            .featured-section {
+                padding: 0 24px;
+            }
+            
+            .featured-grid {
+                /* Stack all 4 cards vertically */
+                grid-template-columns: 1fr;
+            }
+
+            .featured-card {
+                aspect-ratio: 16 / 9; /* Wider for mobile stack */
+            }
+
+            .card-content {
+                bottom: 24px;
+                left: 24px;
+            }
+            .card-pre-title {
+                top: 24px;
+                left: 24px;
+            }
+            .card-top-right {
+                top: 24px;
+                right: 24px;
+            }
+        }
+        
+
+        .nba-carousel {
+            max-width: 100%;
+            margin: 48px 0; /* Adds space above and below */
+            padding: 0 48px; /* Matches site's horizontal padding */
+            box-sizing: border-box; /* Ensures padding doesn't add to width */
+        }
+
+
+        .nba-carousel__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .nba-carousel__header h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0;
+            color: #111;
+        }
+
+        .nba-carousel__nav button {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid #e0e0e0;
+            background-color: #ffffff;
+            font-size: 1.25rem;
+            cursor: pointer;
+            margin-left: 0.5rem;
+            color: #cccccc;
+
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+    .nba-carousel__viewport {
+    overflow-x: auto; 
+    scroll-snap-type: x mandatory;
+    margin: 0 -10px; 
+    padding: 0 10px; 
+    
+   
+    scrollbar-color: #c1c1c1 #f1f1f1;
+    scrollbar-width: thin;
+    }   
+
+        .nba-carousel__viewport::-webkit-scrollbar {
+            height: 6px; /* Sets the height of the horizontal scrollbar */
+        }
+        .nba-carousel__viewport::-webkit-scrollbar-track {
+            background-color: #f1f1f1; /* The light gray track */
+            border-radius: 10px;
+        }
+        .nba-carousel__viewport::-webkit-scrollbar-thumb {
+            background-color: #c1c1c1; /* The darker gray draggable thumb */
+            border-radius: 10px;
+        }
+        .nba-carousel__viewport::-webkit-scrollbar-thumb:hover {
+            background-color: #a8a8a8; /* Makes it slightly darker on hover */
+        }
+
+        .nba-carousel__slider {
+            display: flex;
+            gap: 1.5rem; /* Space between cards */
+            padding-bottom: 1rem; /* Adds space if scrollbar is visible */
+        }
+
+        /* THE PRODUCT CARD */
+
+      .nba-product-card {
+    flex: 0 0 470px;
+
+    scroll-snap-align: start;
+
+    background-color: transparent; /* Use page background */
+    overflow: hidden; /* Clips the image inside */
+}
+
+.nba-product-card__image {
+    background-color: #ffffff;
+    width: 100%;
+    height: 470px;
+    border-radius: 8px; /* Add radius to image bg */
+}
+
+        .nba-product-card__image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Covers the area, may crop image */
+        }
+
+        .nba-product-card__image.placeholder {
+            display: grid;
+            place-items: center;
+            color: #b0b0b0;
+            font-weight: bold;
+        }
+
+        .nba-product-card__info {
+            padding: 1rem 0.25rem; /* Match Nike's minimal padding */
+        }
+
+        .nba-product-card__title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 0;
+            color: #111;
+        }
+
+        .nba-product-card__description {
+            font-size: 0.9rem;
+            color: #757575;
+            margin: 0.25rem 0 0.75rem 0;
+        }
+
+        .nba-product-card__price {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #111;
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            .nba-carousel {
+                padding: 0 24px; /* Match mobile padding */
+            }
+            .nba-product-card {
+                flex: 0 0 280px; /* Make cards smaller on mobile */
+            }
+            .nba-product-card__image {
+                height: 280px;
+            }
+        }
+.shop-by-sport {
+    margin: 58px 0; 
+    padding: 0 58px; 
+}
+
+.sport-carousel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem; /* More space for this design */
+}
+
+.sport-carousel-header h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+    color: #111;
+}
+
+.sport-carousel-nav button {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid #e0e0e0;
+    background-color: #f5f5f5; /* Match the buttons in the image */
+    font-size: 1.25rem;
+    cursor: pointer;
+    margin-left: 0.5rem;
+    color: #cccccc; /* Disabled color */
+    
+    
+}
+
+.sport-carousel-viewport {
+    overflow-x: auto; 
+    scroll-snap-type: x mandatory;
+
+    scrollbar-color: #c1c1c1 #f1f1f1;
+    scrollbar-width: thin;
+}
+
+.sport-carousel-viewport::-webkit-scrollbar {
+    height: 6px; /* Sets the height of the horizontal scrollbar */
+}
+.sport-carousel-viewport::-webkit-scrollbar-track {
+    background-color: #f1f1f1; /* The light gray track */
+    border-radius: 10px;
+}
+.sport-carousel-viewport::-webkit-scrollbar-thumb {
+    background-color: #c1c1c1; /* The darker gray draggable thumb */
+    border-radius: 10px;
+}
+.sport-carousel-viewport::-webkit-scrollbar-thumb:hover {
+    background-color: #a8a8a8; /* Makes it slightly darker on hover */
+}
+.sport-carousel-slider {
+    display: flex;
+    gap: 1.5rem; /* Space between cards (24px) */
+    padding-bottom: 1rem; 
+}
+
+
+
+.sport-card {
+    flex: 0 0 400px;
+    
+    scroll-snap-align: start;
+    
+    text-decoration: none;
+    color: #111;
+}
+
+.sport-card img {
+    width: 100%;
+    display: block; /* Removes any bottom space */
+    aspect-ratio: 4 / 5; /* Makes the image taller than it is wide */
+    object-fit: cover; /* Ensures the image fills the space */
+    background-color: #f4f4f4;
+}
+
+.sport-card h3 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin: 1rem 0 0 0; /* Space between image and text */
+}
+
+@media (max-width: 768px) {
+    .shop-by-sport {
+        padding: 0 24px; /* Reduce side padding on mobile */
+    }
+    
+    .sport-card {
+        flex: 0 0 300px; /* Make cards smaller on mobile */
+    }
+
+    .sport-carousel-header h2 {
+        font-size: 1.25rem;
+    }
+}
+
+
+.shop-by-icons {
+    margin: 48px 0;
+    padding: 0 48px; /* Match site's horizontal padding */
+}
+
+.icons-carousel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.icons-carousel-header h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+    color: #111;
+}
+
+.icons-carousel-nav button {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid #e0e0e0;
+    background-color: #f5f5f5; /* Light gray button */
+    font-size: 1.25rem;
+    cursor: not-allowed; /* Disabled cursor */
+    margin-left: 0.5rem;
+    color: #cccccc; /* Disabled icon color */
+    opacity: 0.8;
+}
+
+
+.icons-carousel-viewport {
+    overflow-x: auto; /* Allows horizontal scrolling */
+    scroll-snap-type: x mandatory; /* Makes it snap */
+    
+    scrollbar-color: #c1c1c1 #f1f1f1;
+    scrollbar-width: thin;
+}
+
+.icons-carousel-viewport::-webkit-scrollbar {
+    height: 6px;
+}
+.icons-carousel-viewport::-webkit-scrollbar-track {
+    background-color: #f1f1f1; 
+    border-radius: 10px;
+}
+.icons-carousel-viewport::-webkit-scrollbar-thumb {
+    background-color: #c1c1c1; 
+    border-radius: 10px;
+}
+.icons-carousel-viewport::-webkit-scrollbar-thumb:hover {
+    background-color: #a8a8a8; 
+}
+
+
+.icons-carousel-slider {
+    display: flex;
+    gap: 1.5rem; /* Space between cards (24px) */
+    padding-bottom: 1rem; /* Space for the scrollbar */
+}
+
+
+.shop-by-icons {
+    margin: 48px 0;
+    padding: 0 48px; 
+}
+
+.icons-carousel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.icons-carousel-header h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+    color: #111;
+}
+
+.icons-carousel-nav button {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid #e0e0e0;
+    background-color: #f5f5f5;
+    font-size: 1.25rem;
+    cursor: not-allowed;
+    margin-left: 0.5rem;
+    color: #cccccc;
+    opacity: 0.8;
+}
+
+
+.icons-carousel-viewport {
+    overflow-x: auto; 
+    scroll-snap-type: x mandatory; 
+    scrollbar-color: #c1c1c1 #f1f1f1;
+    scrollbar-width: thin;
+}
+
+.icons-carousel-viewport::-webkit-scrollbar {
+    height: 6px;
+}
+.icons-carousel-viewport::-webkit-scrollbar-track {
+    background-color: #f1f1f1; 
+    border-radius: 10px;
+}
+.icons-carousel-viewport::-webkit-scrollbar-thumb {
+    background-color: #c1c1c1; 
+    border-radius: 10px;
+}
+.icons-carousel-viewport::-webkit-scrollbar-thumb:hover {
+    background-color: #a8a8a8; 
+}
+
+
+.icons-carousel-slider {
+    display: flex;
+    gap: 1.5rem; /* Space between cards (24px) */
+    padding-bottom: 1rem; 
+}
+
+
+.icon-card {
+    /* 1. Sizing and Snap */
+    flex: 0 0 320px; 
+    scroll-snap-align: start;
+    aspect-ratio: 4 / 5;
+    
+    /* 2. Card Appearance */
+    position: relative; /* For positioning text */
+    text-decoration: none;
+    border-radius: 12px; /* Rounded corners */
+    
+    /* 3. THIS IS THE FIX: */
+    /* This clips the image and contains the zoom effect */
+    overflow: hidden; 
+    background-color: #f0f0f0; /* Fallback bg color */
+}
+
+.icon-card img {
+    width: 100%;
+    height: 100%;
+    
+
+    object-fit: cover; 
+    
+    transition: transform 0.4s ease-out;
+}
+
+.icon-card:hover img {
+    transform: scale(1.1);
+}
+
+.icon-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50%; /* Covers the bottom half */
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    z-index: 2;
+}
+
+/* This styles the text on top of the gradient */
+.icon-card h3 {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin: 0;
+    color: #ffffff;
+    z-index: 3; /* Sits on top of the gradient */
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 768px) {
+    .shop-by-icons {
+        padding: 0 24px;
+    }
+    
+    .icon-card {
+        flex: 0 0 280px;
+    }
+} 
+.site-footer {
+    background-color: #ffffff;
+    color: #111111;
+    padding: 40px 60px; /* Padding around the whole footer */
+    border-top: 1px solid #f0f0f0; /* Faint top border */
+}
+
+.footer-container {
+    max-width: 1440px; /* Limit width */
+    margin: 0 auto; /* Center the container */
+}
+
+/* --- Top Section: Links + Location --- */
+.footer-main {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+    gap: 40px;
+    margin-bottom: 30px;
+}
+
+.footer-links-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 80px; /* Space between link columns */
+}
+
+.footer-column h3 {
+    font-size: 16px;
+    font-weight: 600; /* Bold */
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.footer-column h3 span { /* The dropdown arrow */
+    font-weight: normal;
+    margin-left: 5px;
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-column li {
+    margin-bottom: 12px;
+}
+
+.footer-column a {
+    text-decoration: none;
+    color: #111111; /* Dark text for links */
+    font-size: 14px;
+    font-weight: 400; /* Normal weight */
+}
+
+.footer-column a:hover {
+    color: #757575; /* Gray on hover */
+}
+
+/* --- Location --- */
+.footer-location a {
+    text-decoration: none;
+    color: #111111;
+    font-size: 14px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.footer-location a:hover {
+    color: #757575;
+}
+
+
+.footer-bottom-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; 
+    gap: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #e5e5e5; 
+    font-size: 12px;
+    color: #757575; 
+}
+
+.copyright small {
+    font-size: inherit;
+    color: inherit;
+}
+
+.footer-legal-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px; 
+}
+
+.footer-legal-links a {
+    text-decoration: none;
+    color: #757575; 
+    font-size: 12px;
+}
+
+.footer-legal-links a:hover {
+    color: #111111; 
+}
+
+.footer-legal-links a span { 
+    font-weight: normal;
+    margin-left: 3px;
+}
+
+@media (max-width: 960px) {
+    .site-footer {
+        padding: 30px 20px; 
+    }
+
+    .footer-main {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .footer-links-container {
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    .footer-column {
+        min-width: 100%; 
+    }
+
+    .footer-location {
+        align-self: flex-start; 
+    }
+
+    .footer-bottom-bar {
+        flex-direction: column;
+        align-items: flex-start; 
+        gap: 15px;
+    }
+
+    .footer-legal-links ul {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+}
+
+.mobile-menu-button {
+    display: none; 
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 101;
+}
+
+
+.mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    z-index: 1000;
+    padding: 60px 24px 24px;
+    overflow-y: auto;
+    transform: translateX(100%); /* Start off-screen */
+    transition: transform 0.3s ease-in-out;
+}
+/* This rule shows the menu when the checkbox is checked */
+#mobile-menu-toggle:checked ~ .mobile-menu-overlay {
+    transform: translateX(0);
+}
+.mobile-menu-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 36px;
+    font-weight: 300;
+    color: #111;
+    cursor: pointer;
+    line-height: 1;
+}
+.mobile-nav-menu li {
+    padding: 0;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #f0f0f0;
+}
+.mobile-nav-menu li:last-child {
+    border-bottom: none;
+}
+.mobile-nav-menu a {
+    display: block;
+    padding: 12px 0;
+    font-size: 18px;
+    font-weight: 500;
+    color: #111;
+    border-bottom: none; /* Override desktop hover effect */
+}
+.mobile-nav-menu a:hover {
+    border-bottom: none; /* Override desktop hover effect */
+    color: #757575;
+}
+.mobile-nav-menu hr {
+    border: none;
+    border-top: 1px solid #e5e5e5;
+    margin: 20px 0;
+}
+
+/* 3. Media Query to activate mobile view */
+@media (max-width: 1024px) {
+    /* Hide desktop-specific elements */
+    .top-bar,
+    .nav-menu,
+    .mega-menu,
+    .search-container input {
+        display: none;
+    }
+
+    /* Show the mobile hamburger button */
+    .mobile-menu-button {
+        display: block;
+    }
+
+    /* Adjust the main nav bar layout for mobile */
+    .main-nav {
+        justify-content: space-between;
+        padding: 0 24px;
+        height: 60px;
+    }
+    .nav-left,
+    .nav-right {
+        position: static; /* Let them fall into the flex layout */
+        transform: none;
+    }
+    .nike-logo {
+        height: 40px;
+        width: 40px;
+    }
+    .nav-right {
+        gap: 8px; /* Reduce space between right-side icons */
+    }
+    .search-container {
+        background-color: transparent;
+        padding: 4px;
+    }
+    .search-icon {
+        margin-right: 0;
+    }
+}
+
+/* Optional: Finer adjustments for very small phones */
+ @media (max-width: 767px) {
+     .main-nav {
+        padding: 0 16px;
+    }
+    .mobile-menu-button {
+        right: 12px;
+    }
+ }
